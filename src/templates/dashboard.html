@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>User Dashboard</title>
+    <link rel="stylesheet" href="../static/css/dashboard-style.css"> <!-- Link to your CSS file -->
+</head>
+<body>
+    <header>
+        <h1>Welcome, {{data["first_name"]}}!</h1> <!-- Display the user's name -->
+        <nav>
+            <ul>
+                <li><a href="#dashboard">Dashboard</a></li>
+                <li><a href="#policy-management">Policy Management</a></li>
+                <li><a href="#profile-settings">Profile Settings</a></li>
+                <li><a href="#benefits">Benefits</a></li>
+                <li><a href="/logout">Logout</a></li> <!-- Link to the logout endpoint -->
+            </ul>
+        </nav>
+    </header>
+
+    <section id="dashboard">
+        <div class="container">
+            <h2>Dashboard Overview</h2>
+            <!-- Display relevant user information and summary of policy details -->
+        </div>
+    </section>
+
+    <section id="policy-management">
+        <div class="container">
+            <h2>Policy Management</h2>
+            <!-- Display options for managing policies: view, add, edit, cancel policies -->
+        </div>
+    </section>
+
+    <section id="profile-settings">
+        <div class="container">
+            <h2>Profile Settings</h2>
+            <!-- Allow users to update personal information, contact details, preferences -->
+        </div>
+    </section>
+
+    <section id="benefits">
+        <div class="container">
+            <h2>Benefits</h2>
+            <!-- Display any available discounts, promotions, special offers -->
+        </div>
+    </section>
+
+    <footer>
+        <div class="container">
+            <p>&copy; 2024 InsureHub. All rights reserved.</p>
+        </div>
+    </footer>
+</body>
+</html>
