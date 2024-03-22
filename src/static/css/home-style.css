@@ -19,7 +19,7 @@ body {
 }
 
 header {
-    background-color: #007bff;
+    background-color: #e6d4e7; /* Light purple container */
     color: #fff;
     padding: 20px 0;
 }
@@ -69,7 +69,7 @@ p {
 }
 
 .btn:hover {
-    background-color: #0056b3;
+    background-color: #e6d4e7; /* Light purple container */
 }
 
 footer {
@@ -82,6 +82,31 @@ footer {
 footer p {
     font-size: 0.9em;
 }
+
+/* CSS for aligning logo and links */
+.logo {
+    display: flex;
+    align-items: center;
+}
+
+.logo img {
+    width: 200px;
+    margin-right: 10px; /* Add some spacing between logo and text */
+}
+
+nav ul {
+    list-style: none;
+    display: flex;
+}
+
+nav ul li {
+    margin-right: 20px;
+}
+
+nav ul li:last-child {
+    margin-right: 0; /* Remove margin from the last link */
+}
+
 
 /* Media Queries for Responsive Design */
 @media screen and (max-width: 768px) {

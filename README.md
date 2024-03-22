@@ -30,6 +30,7 @@ flask run  --debug
 ```
 
 ## REFERENCES
+- https://app.logo.com/dashboard/your-logo-files
 - https://feliperego.github.io/blog/2019/01/11/Creating-Fake-Mock-Data-Python
 - https://www.kaggle.com/code/sagarsharma4244/complete-insurance-data-analysis
 - 
