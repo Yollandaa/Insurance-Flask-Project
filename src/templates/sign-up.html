@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sign Up - InsureHub</title>
+    <link rel="stylesheet" href="../static/css/signup-style.css">
+</head>
+<body>
+    <div class="container">
+		<div class="logo">
+			<img src="../static/images/logo.png" alt="InsureHub Logo">
+		</div>
+        <h2>Sign Up for InsureHub</h2>
+        <form action="/signup" method="POST">
+            <div class="name-cont">
+                <label for="name">Name:</label>
+                <input type="text" id="name" name="name" required>
+            </div>
+            <div class="surname-cont">
+                <label for="surname">Surname:</label>
+                <input type="text" id="surname" name="surname" required>
+            </div>
+            <div class="id-cont">
+                <label for="id_number">ID Number:</label>
+                <input type="text" id="id_number" name="id_number" required>
+            </div>
+            <div class="number-cont">
+                <label for="phone">Phone Number:</label>
+                <input type="tel" id="phone" name="phone" required>
+            </div>
+            <div class="email-cont">
+                <label for="email">Email:</label>
+                <input type="email" id="email" name="email" required>
+            </div>
+            <div class="terms-cont">
+                <div>
+                    <input type="checkbox" id="terms" name="terms" required>
+                </div>
+                <div>
+                    <label for="terms">I agree to the terms and conditions</label>
+                </div>
+            </div>
+            <button type="submit" class="btn btn-primary">Sign Up</button>
+        </form>
+    </div>
+</body>
+</html>
