@@ -8,11 +8,12 @@
 - ```deactivate``` -> python -> global python installed
 - Create a gitignore file and insert "myenv" so that it ignores any changes in the myenv folder.
 
-## Installing Flask
-- Make sure your env is activated, then install flask: [ref](https://flask.palletsprojects.com/en/3.0.x/installation/)
+## Installing Dependencies
 ```sh
-pip install flask
+pip install -r requirements.txt
 ```
+- The requirements.txt file contains all the requirements needed to run this project.
+
 
 ## How to run flask
 - Make sure you are in the src folder.
