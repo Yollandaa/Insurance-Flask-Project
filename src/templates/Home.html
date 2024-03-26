@@ -29,11 +29,10 @@
             <h2>Insurance Offerings</h2>
             <p>Explore our range of insurance products tailored to your needs:</p>
             <div class="insurances-cont">
-                <ul>
-                    <li>Health Insurance</li>
-                    <li>Vehicle Insurance</li>
-                    <li>Property Insurance</li>
-                    <li>Life Insurance</li>
+                <ul class="policy-list">
+                    {% for policy in policies %}
+                        <li>{{ policy }}</li>
+                    {% endfor %}
                 </ul>
             </div>
             </div>
@@ -42,7 +41,9 @@
         <div class="container">
             <h2>Contact Us</h2>
             <p>Have questions or need assistance? Reach out to our customer support team.</p>
-            <a href="mailto:info@ipms.com" class="btn btn-secondary">Email Us</a>
+            <p> For personalized insurance assistance, reach out to our Client Care Department at <span class="number">082 325 6789.</span>
+                We're here to support you every step of the way, ensuring a smooth experience. Don't hesitate to contact us for any inquiries or guidance you may need. </p>
+            <a href="mailto:info@insurehub.com" class="btn btn-secondary">Email Us</a>
         </div>
     </section>
     <section id="get-quote" class="get-quote">

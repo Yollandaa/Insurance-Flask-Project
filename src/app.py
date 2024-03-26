@@ -12,18 +12,35 @@ users_data = {
     "Address": "1004 Jakayla Plaza",
     "phone_number": "(506) 632-6488 x497",
     "profile_url": "https://cloudflare-ipfs.com/ipfs/Qmd3W5DuhgHirLHGVixi6V76LhCkZUz6pnFt5AJBiyvHye/avatar/1071.jpg",
-    "policy_type": ["Life Coverage", "Car Coverage"],
-    "coverage_amount": "608.89",
-    "premium_amount": "93.18",
+    "policies": [
+        {
+            "type": "Life Coverage",
+            "coverage_amount": "608.89",
+            "premium_amount": "93.18",
+            "status": "Active",
+        },
+        {
+            "type": "Car Coverage",
+            "coverage_amount": "608.89",
+            "premium_amount": "93.18",
+            "status": "Pending",
+        },
+    ],
     "beneficiary": "Peter Orn",
-    "status": False,
     "id": "1",
 }
+
+policy_types = [
+    "Vehicle Insurance",
+    "Life Insurance",
+    "Property Insurance",
+    "Funeral Insurance",
+]
 
 
 @app.route("/")
 def welcome_page():
-    return render_template("Home.html")
+    return render_template("Home.html", policies=policy_types)
 
 
 @app.route("/login", methods=["GET", "POST"])
@@ -43,3 +60,8 @@ def signup_page():
 @app.route("/dashboard")
 def dashboard_page():
     return render_template("dashboard.html", data=users_data)
+
+
+@app.route("/get-quote")
+def get_quote_page():
+    return render_template("get-quote.html", policies=policy_types)

@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Get a Quote - InsureHub</title>
+    <link rel="stylesheet" href="../static/css/home-style.css">
+    <style>
+        .policy-container {
+            border: 1px solid #ccc;
+            padding: 20px;
+            margin: 10px;
+            cursor: pointer;
+        }
+        .policy-container:hover {
+            background-color: #f0f0f0;
+        }
+        .questionnaire {
+            display: none; /* Initially hidden */
+            margin-top: 20px;
+        }
+        .questionnaire.active {
+            display: block; /* Display when active */
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container">
+            <div class="logo">
+                <img src="../static/images/logo.png" alt="InsureHub Logo">
+            </div>
+            <h1>Welcome to InsureHub</h1>
+            <nav>
+                <ul>
+                    <li><a href="/">Home</a></li>
+                    <li><a href="/login">Login</a></li>
+                    <li><a href="/sign-up">Sign Up</a></li>
+                    <li><a href="#get-quote">Get a Quote</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+    <section id="get-quote" class="get-quote">
+        <div class="container">
+            <h2>Get a Quote</h2>
+            <p>Select the insurance policy you want a quote on:</p>
+            <div class="policy-selection">
+                <!-- Loop through policies to create policy selection containers -->
+                {% for policy in policies %}
+                <div class="policy-container" onclick="showQuestionnaire('{{ policy.id }}')">
+                    <h3>{{ policy }}</h3>
+                </div>
+                {% endfor %}
+            </div>
+
+            <!-- Questionnaire section for each policy -->
+            {% for policy in policies %}
+            <div id="questionnaire-{{ policy.id }}" class="questionnaire">
+                <!-- Questionnaire for each policy -->
+                <h3>Questionnaire for {{ policy.name }}</h3>
+                <!-- Include relevant questions here -->
+            </div>
+            {% endfor %}
+            <a href="#" class="btn btn-primary">Get Quotes</a>
+        </div>
+    </section>
+    <footer>
+        <div class="container">
+            <p>&copy; 2024 IPMS. All rights reserved.</p>
+        </div>
+    </footer>
+</body>
+</html>

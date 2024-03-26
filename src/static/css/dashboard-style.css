@@ -101,3 +101,24 @@ footer p {
 .logo img {
     width: 200px; /* Adjust size as needed */
 }
+.policies-box {
+    display: flex;
+    flex-wrap: wrap; /* Allow wrapping if content exceeds container width */
+    justify-content: space-between; /* Distribute items evenly along the main axis */
+}
+
+.policy-cont {
+    background-color: #e6d4e7;
+    font-family: sans-serif;
+    margin: 20px;
+    padding: 20px;
+    width: calc(33.33% - 40px); /* Set width for each box, adjust as needed */
+    box-sizing: border-box;
+    box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
+}
+.poster {
+    height: 300px;
+    width: 100%;
+    object-fit: cover;
+    border-radius: 24px;
+}

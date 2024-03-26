@@ -123,4 +123,15 @@ footer p {
     display: block;
     margin: 0 auto;
 }
+.number {
+    font-weight: bold;
+    align-items: center;
+}
+.policy-list {
+    list-style-type: none;
+    padding: 0;
+}
 
+.policy-list li {
+    margin-right: 10px; /* Adjust as needed */
+}
