@@ -1,40 +1,26 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Login - InsureHub</title>
-    <link rel="stylesheet" href="../static/css/login-style.css">
-</head>
-<body>
-    <div class="container">
-		<div class="logo">
-			<img src="../static/images/logo.png" alt="InsureHub Logo">
-		</div>
-        <h2>Login to InsureHub</h2>
-        <form action="/login" method="POST">
-            <div class="input-group">
-                <label for="username_email">Username/Email:</label>
-                <input type="text" id="username_email" name="username_email" required>
-            </div>
-            <div class="input-group">
-                <label for="password">Password:</label>
-                <input type="password" id="password" name="password" required>
-            </div>
-            <button type="submit" class="btn btn-primary">Login</button>
-        </form>
-        <div class="or-divider">
-            <hr>
-            <span>OR</span>
+{% extends 'form-base.html' %} {% block title %} Login - InsureHub {% endblock %}
+{% block subtitle %} Login to InsureHub {% endblock %}
+{% block login %}
+      <!-- action="" -> Submit to current url  -->
+      <form method="POST" action="">
+        <!-- Hidden input with token as value -->
+        <!-- Validations -->
+        <!-- {{form.hidden_tag()}} {% if form.username.errors %} {% for error in form.username.errors %}
+        <div style="color: red">{{error}}</div>
+        {% endfor %} {% endif %} {% if form.password.errors %} {% for error in
+        form.password.errors %}
+        <div style="color: red">{{error}}</div>
+        {% endfor %} {% endif %} -->
+
+        <!-- Display fields -->
+        <div class="form-group">
+          {{form.username.label}}: {{form.username(placeholder="Rashay",
+          class="form-control is-invalid")}}
         </div>
-        <h3>Login with ID Number</h3>
-        <form action="/login" method="POST">
-            <div class="input-group">
-                <label for="id_number">ID Number:</label>
-                <input type="text" id="id_number" name="id_number" required>
-            </div>
-            <button type="submit" class="btn btn-primary">Login</button>
-        </form>
-    </div>
-</body>
-</html>
+        <div class="form-group">
+          {{form.password.label}}: {{form.password(placeholder="Password",
+          class="form-control")}}
+        </div>
+        {{form.submit(class="btn btn-primary")}}
+      </form>
+{% endblock %}

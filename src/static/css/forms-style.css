@@ -1,0 +1,25 @@
+body, html {
+    align-items: center;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.container {
+    width: 100%;
+    background-color: #d7f3fd;
+    padding: 40px;
+    margin: auto; 
+    margin-top: 100px;
+}
+
+.logo {
+    display: grid;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 30px; 
+}
+
+.logo img {
+    width: 180px;
+    margin-left: 40px;
+}
+

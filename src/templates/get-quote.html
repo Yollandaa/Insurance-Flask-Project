@@ -1,46 +1,5 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Get a Quote - InsureHub</title>
-    <link rel="stylesheet" href="../static/css/home-style.css">
-    <style>
-        .policy-container {
-            border: 1px solid #ccc;
-            padding: 20px;
-            margin: 10px;
-            cursor: pointer;
-        }
-        .policy-container:hover {
-            background-color: #f0f0f0;
-        }
-        .questionnaire {
-            display: none; /* Initially hidden */
-            margin-top: 20px;
-        }
-        .questionnaire.active {
-            display: block; /* Display when active */
-        }
-    </style>
-</head>
-<body>
-    <header>
-        <div class="container">
-            <div class="logo">
-                <img src="../static/images/logo.png" alt="InsureHub Logo">
-            </div>
-            <h1>Welcome to InsureHub</h1>
-            <nav>
-                <ul>
-                    <li><a href="/">Home</a></li>
-                    <li><a href="/login">Login</a></li>
-                    <li><a href="/sign-up">Sign Up</a></li>
-                    <li><a href="#get-quote">Get a Quote</a></li>
-                </ul>
-            </nav>
-        </div>
-    </header>
+{% extends 'base.html' %} {% block title %} Get a Quote - InsureHub {% endblock %}
+{% block quotepage %}
     <section id="get-quote" class="get-quote">
         <div class="container">
             <h2>Get a Quote</h2>
@@ -70,5 +29,4 @@
             <p>&copy; 2024 IPMS. All rights reserved.</p>
         </div>
     </footer>
-</body>
-</html>
+{% endblock %}

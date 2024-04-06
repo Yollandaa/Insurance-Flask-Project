@@ -1,7 +1,23 @@
+import os
 import json
-from flask import Flask, jsonify, render_template, request, redirect, url_for
+from flask import Flask, jsonify, render_template, request
+from sqlalchemy.sql import text
+from dotenv import load_dotenv
+from pprint import pprint
+import uuid
+from extensions import db, login_manager
 
+
+load_dotenv()
 app = Flask(__name__)
+
+app.config["SECRET_KEY"] = os.environ.get("FORM_SECRET_KEY")
+
+connection_String = os.environ.get("AZURE_DATABASE_URL")
+app.config["SQLALCHEMY_DATABASE_URI"] = connection_String
+
+db.init_app(app)
+login_manager.init_app(app)
 
 users_data = {
     "username": "Emmie.MacGyver",
@@ -43,19 +59,6 @@ def welcome_page():
     return render_template("Home.html", policies=policy_types)
 
 
-@app.route("/login", methods=["GET", "POST"])
-def login_page():
-    if request.method == "POST":
-        # To do: Need to uathenticate login
-        return redirect(url_for("dashboard_page"))
-    return render_template("login.html")
-
-
-@app.route("/sign-up")
-def signup_page():
-    return render_template("sign-up.html")
-
-
 # This will receive the user ID, so each user has their own information on the dashboard
 @app.route("/dashboard")
 def dashboard_page():
@@ -65,3 +68,19 @@ def dashboard_page():
 @app.route("/get-quote")
 def get_quote_page():
     return render_template("get-quote.html", policies=policy_types)
+
+
+from routes.form_bp import forms_bp
+
+app.register_blueprint(forms_bp, url_prefix="/form")
+
+try:
+    with app.app_context():
+        # Use text() to explicitly declare your SQL command
+        result = db.session.execute(text("SELECT 1")).fetchall()
+        print("Connection successful:", result)
+        # db.drop_all()
+        db.create_all()  # This creates the table if it diesn't exist in the mssm database -> Sync tables to DB
+        print("Creatiion done")
+except Exception as e:
+    print("Error connecting to the database:", e)

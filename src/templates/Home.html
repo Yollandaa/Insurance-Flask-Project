@@ -1,29 +1,5 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Welcome to InsureHub</title>
-    <link rel="stylesheet" href="../static/css/home-style.css">
-</head>
-<body>
-    <header>
-        <div class="container">
-            <div class="logo">
-                <img src="../static/images/logo.png" alt="InsureHub Logo">
-            </div>
-            <h1>Welcome to InsureHub</h1>
-            <nav>
-                <ul>
-                    <li><a href="#insurances">Insurances</a></li>
-                    <li><a href="/login">Login</a></li>
-                    <li><a href="/sign-up">Sign Up</a></li>
-                    <li><a href="#contact">Contact Us</a></li>
-                    <li><a href="#get-quote">Get a Quote</a></li>
-                </ul>
-            </nav>
-        </div>
-    </header>
+{% extends 'base.html' %} {% block title %} Welcome to InsureHub {% endblock %}
+{% block homepage %}
     <section id="insurances" class="insurances">
         <div class="container">
             <h2>Insurance Offerings</h2>
@@ -58,5 +34,4 @@
             <p>&copy; 2024 IPMS. All rights reserved.</p>
         </div>
     </footer>
-</body>
-</html>
+{% endblock %}
