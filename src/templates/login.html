@@ -5,12 +5,19 @@
       <form method="POST" action="">
         <!-- Hidden input with token as value -->
         <!-- Validations -->
-        <!-- {{form.hidden_tag()}} {% if form.username.errors %} {% for error in form.username.errors %}
-        <div style="color: red">{{error}}</div>
-        {% endfor %} {% endif %} {% if form.password.errors %} {% for error in
-        form.password.errors %}
-        <div style="color: red">{{error}}</div>
-        {% endfor %} {% endif %} -->
+        
+        {{form.hidden_tag()}}
+        {% if form.errors %}
+        <div class="alert alert-danger">
+            <ul>
+                {% for field, errors in form.errors.items() %}
+                    {% for error in errors %}
+                        <li>{{ error }}</li>
+                    {% endfor %}
+                {% endfor %}
+            </ul>
+        </div>
+        {% endif %}
 
         <!-- Display fields -->
         <div class="form-group">

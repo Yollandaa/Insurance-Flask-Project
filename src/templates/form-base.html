@@ -14,6 +14,21 @@
   />
 </head>
 <body>
+  <nav class="navbar">
+    <a class="navbar-brand" href="/">
+        <img src="../static/images/logo2.png" width="60" height="60" class="d-inline-block align-top" alt="">
+        <span class="brand-text">InsureHub</span>
+    </a>
+    <div class="d-flex align-items-center">
+        <a class="nav-link active" href="/"> Home <span class="sr-only">(current)</span></a>
+        <a class="nav-link" href="/#get-quote">Get a Quote</a>
+        <a class="nav-link" href="/form/login">Login</a>
+        <a class="nav-link" href="/form/register">Sign Up</a>
+        <a class="nav-link" href="/#contact">Contact Us</a>
+    </div>
+</nav>
+
+
     <div class="container">
 		<div class="logo">
 			<img src="../static/images/logo2.png" alt="InsureHub Logo">
@@ -24,6 +39,8 @@
         {% block login %} {% endblock %}
 
         {% block register %} {% endblock %}
+
+        {% block contactus %} {% endblock %}
     </div>
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>

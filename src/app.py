@@ -1,6 +1,7 @@
 import os
 import json
 from flask import Flask, jsonify, render_template, request
+from flask_login import current_user
 from sqlalchemy.sql import text
 from dotenv import load_dotenv
 from pprint import pprint
@@ -62,7 +63,8 @@ def welcome_page():
 # This will receive the user ID, so each user has their own information on the dashboard
 @app.route("/dashboard")
 def dashboard_page():
-    return render_template("dashboard.html", data=users_data)
+    user = current_user
+    return render_template("dashboard.html", data=user.to_dict())
 
 
 @app.route("/get-quote")
