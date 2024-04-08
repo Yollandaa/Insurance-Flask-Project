@@ -1,13 +1,15 @@
-import datetime
+from datetime import datetime
 from flask import Blueprint, render_template, flash, redirect, url_for
 from flask_login import login_user
 from extensions import db
 from models.contactus import ContactUs
 from models.users import User
 from wtforms import (
+    DateField,
     EmailField,
     IntegerField,
     PasswordField,
+    SelectField,
     StringField,
     SubmitField,
     TelField,
@@ -19,7 +21,7 @@ from wtforms import BooleanField
 from flask_wtf import FlaskForm
 from app import login_manager
 from werkzeug.security import generate_password_hash, check_password_hash
-
+from calculator import car_quote, get_coverage
 
 forms_bp = Blueprint("forms", __name__)
 
@@ -108,6 +110,51 @@ class ContactForm(FlaskForm):
     submit = SubmitField(label="Submit")
 
 
+# Form for quote calculator
+class GetQuoteForm(FlaskForm):
+    age = IntegerField(label="Age", validators=[InputRequired()])
+    car_type = SelectField(
+        "Car Type",
+        choices=[
+            ("Sedan", "Sedan"),
+            ("Hatchback", "Hatchback"),
+            ("Coupe", "Coupe"),
+            ("Wagon", "Wagon"),
+            ("SUV (Sport Utility Vehicle)", "SUV (Sport Utility Vehicle)"),
+            ("Crossover", "Crossover"),
+            ("Electric Vehicle (EV)", "Electric Vehicle (EV)"),
+            ("Hybrid", "Hybrid"),
+            ("Convertible", "Convertible"),
+            ("Luxury", "Luxury"),
+        ],
+        validators=[InputRequired()],
+    )
+    year = DateField(
+        "Year of Car",
+        default=datetime(datetime.now().year, 1, 1),
+        validators=[InputRequired()],
+    )
+    license_years = IntegerField(
+        "Number of Years with license", validators=[InputRequired()]
+    )
+    accidents = IntegerField("Number of Accidents", validators=[InputRequired()])
+    submit = SubmitField("Calculate")
+
+    def validate_age(self, field):
+        if field.data < 0:
+            raise ValidationError("Age cannot be negative")
+        if field.data < 18 or field.data > 65:
+            raise ValidationError("Age must be between 18 and 65 to qualify.")
+
+    def validate_accidents(self, field):
+        if field.data < 0:
+            raise ValidationError("Number of Accidents cannot be negative")
+
+    def validate_licence_years(self, field):
+        if field.data < 0:
+            raise ValidationError("Number of Licence Years cannot be negative")
+
+
 @forms_bp.route("/register", methods=["POST", "GET"])
 def register():
     # GET and POST
@@ -191,3 +238,20 @@ def home():
             return f"<h1> Message Failed </h1>, {e}</h1>"
 
     return render_template("contact-us.html", form=form)
+
+
+@forms_bp.route("/get-quote", methods=["GET", "POST"])
+def get_quote():
+    form = GetQuoteForm()
+    if form.validate_on_submit():
+        age = form.age.data
+        car_type = form.car_type.data
+        year = form.year.data.year
+        license_years = form.license_years.data
+        accidents = form.accidents.data
+
+        premium = car_quote(age, license_years, car_type, year, accidents)
+        # return f"<h1> Quote: R{premium} </h1>"
+        formatted_premium = "{:.2f}".format(premium)
+        flash(f"Quote: R{formatted_premium}", "quote_message")
+    return render_template("get-quote.html", form=form)
