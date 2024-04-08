@@ -1,6 +1,8 @@
+import datetime
 from flask import Blueprint, render_template, flash, redirect, url_for
 from flask_login import login_user
 from extensions import db
+from models.contactus import ContactUs
 from models.users import User
 from wtforms import (
     EmailField,
@@ -169,7 +171,23 @@ def load_user(user_id):
 def home():
     form = ContactForm()
     if form.validate_on_submit():
-        print(
-            f"Name:{form.name.data}, E-mail:{form.email.data}, message:{form.message.data}"
+        name = form.name.data
+        phone_number = form.phone_number.data
+        message = form.message.data
+        new_contact = ContactUs(
+            name=name,
+            phone_number=phone_number,
+            message=message,
+            created_at=datetime.datetime.now(),
+            status=True,
         )
+
+        try:
+            db.session.add(new_contact)
+            db.session.commit()
+            return f"<h1> {new_contact} Message successfully added </h1>", 201
+        except Exception as e:
+            db.session.rollback()
+            return f"<h1> Message Failed </h1>, {e}</h1>"
+
     return render_template("contact-us.html", form=form)
