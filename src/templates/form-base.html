@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>{% block title %} {% endblock %}</title>
     <link rel="stylesheet" href="../static/css/forms-style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
 
     <link
     rel="stylesheet"
@@ -20,21 +21,25 @@
         <span class="brand-text">InsureHub</span>
     </a>
     <div class="d-flex align-items-center">
-        <a class="nav-link active" href="/"> Home <span class="sr-only">(current)</span></a>
-        <a class="nav-link" href="/#get-quote">Get a Quote</a>
-        <a class="nav-link" href="/form/login">Login</a>
-        <a class="nav-link" href="/form/register">Sign Up</a>
-        <a class="nav-link" href="/#contact">Contact Us</a>
-    </div>
+      <a class="nav-link active" href="/"> Home <span class="sr-only">(current)</span></a>
+      <a class="nav-link" href="/#get-quote">Get a Quote</a>
+      <a class="nav-link" href="/#contact">Contact Us</a>
+      <a class="nav-link" href="/form/login">
+          <i class="fas fa-user"></i> Login
+      </a>
+      <a class="nav-link" href="/form/register">
+          <i class="fas fa-user"></i> Sign Up</a>
+      
+  </div>
 </nav>
 
 
     <div class="container">
-		<div class="logo">
-			<img src="../static/images/logo2.png" alt="InsureHub Logo">
-            <br></br>
-            <h2>{% block subtitle %} {% endblock %}</h2>
-		</div>
+      <div class="logo">
+        <img src="../static/images/logo2.png" alt="InsureHub Logo">
+              <br></br>
+              <h2>{% block subtitle %} {% endblock %}</h2>
+      </div>
 
         {% block login %} {% endblock %}
 

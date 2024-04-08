@@ -1,8 +1,6 @@
-body, html {
-    align-items: center;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+body {
+    background-color: #1985A1;
 }
-
 /* Nav Bar Styles */
 .navbar-brand span {
     font-size: 37px;

@@ -2,16 +2,46 @@
 {% block homepage %}
     <section id="insurances" class="insurances">
         <div class="container">
-            <h2>Insurance Offerings</h2>
-            <p>Explore our range of insurance products tailored to your needs:</p>
-            <div class="insurances-cont">
-                <ul class="policy-list">
-                    {% for policy in policies %}
-                        <li>{{ policy }}</li>
-                    {% endfor %}
-                </ul>
+            <h2>Vehicle Insurance Company</h2>
+            <div class="cover-type">
+                <img src="../static/images/comprehensive.png" alt="Comprehensive Car Cover">
+                <div class="cover-description">
+                    <h3>Comprehensive Car Cover</h3>
+                    <p>
+                        Comprehensive car cover provides the highest level of protection for your vehicle. 
+                        It covers a wide range of risks, including theft, loss, damage from accidents, fire, vandalism, and natural disasters. With comprehensive cover, you can have peace of mind knowing that your car is fully protected against various unforeseen events.
+                    </p>
+                </div>
             </div>
+            <div class="cover-type">
+                <img src="https://strollinsurance.s3-assets.com/third-party-fire-theft.png" alt="Third-Party, Fire, and Theft Cover">
+                <div class="cover-description">
+                    <h3>Third-Party, Fire, and Theft Cover</h3>
+                    <p>
+                        Third-party, fire, and theft cover offers protection for your vehicle in case it's stolen or damaged by fire, while also providing coverage for any damage your vehicle causes to third parties. 
+                        This type of cover is more affordable than comprehensive insurance and is ideal for budget-conscious individuals who want basic protection against theft and fire incidents.
+                    </p>
+                </div>
             </div>
+            <div class="cover-type">
+                <img src="https://i0.wp.com/pune.news/wp-content/uploads/2023/06/Car-Insurance.webp?resize=696%2C392&ssl=1" alt="Third-Party Only Car Cover">
+                <div class="cover-description">
+                    <h3>Third-Party Only Car Cover</h3>
+                    <p>
+                        Third-party only car cover provides coverage for damage caused by your vehicle to other people's property or vehicles. It does not cover any damage to your own vehicle. 
+                        This type of cover is suitable for individuals who have older or lower-value cars and want to meet legal requirements without paying for comprehensive protection.
+                    </p>
+                </div>
+            </div>
+        </div>
+            </div>
+    </section>
+    <section id="get-quote" class="get-quote">
+        <div class="container">
+            <h2>Get a Quote</h2>
+            <p>Ready to get started? Get a personalized insurance quote today.</p>
+            <a href="/get-quote" class="btn btn-primary">Get Started</a>
+        </div>
     </section>
     <section id="contact" class="contact">
         <div class="container">
@@ -23,16 +53,21 @@
             <a href="/form/contact-us" class="btn btn-primary">Let Us Contact You</a>
         </div>
     </section>
-    <section id="get-quote" class="get-quote">
-        <div class="container">
-            <h2>Get a Quote</h2>
-            <p>Ready to get started? Get a personalized insurance quote today.</p>
-            <a href="/get-quote" class="btn btn-primary">Get Started</a>
-        </div>
-    </section>
     <footer>
         <div class="container">
             <p>&copy; 2024 IPMS. All rights reserved.</p>
+            <div class="social-icons">
+                <a href="#" class="social-icon">
+                    <i class="fab fa-facebook-f"></i>
+                </a>
+                <a href="#" class="social-icon">
+                    <i class="fab fa-twitter"></i>
+                </a>
+                <a href="#" class="social-icon">
+                    <i class="fab fa-instagram"></i>
+                </a>
+                <!-- Add more social media icons as needed -->
+            </div>
         </div>
     </footer>
 {% endblock %}

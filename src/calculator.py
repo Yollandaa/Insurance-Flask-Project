@@ -37,5 +37,15 @@ def car_quote(age, license_year_issue, car_type, accidents=0):
 
 # Might not be necessary to do other calculations, can just ask for details then consultant will contact them
 
+
+def determine_coverage(premium_amount):
+    if premium_amount < 200:
+        return "R15,000 coverage"
+    elif 200 <= premium_amount < 300:
+        return "R25,000 coverage"
+    else:
+        return "Custom coverage based on premium amount"
+
+
 if __name__ == "__main__":
     print(car_quote(18, 2024, "SUV (Sport Utility Vehicle)"))

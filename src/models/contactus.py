@@ -10,7 +10,7 @@ class ContactUs(UserMixin, db.Model):
     name = db.Column(db.String(50))
     phone_number = db.Column(db.String(20))
     message = db.Column(db.String(500))
-    created_at = db.Column(db.DateTime)
+    created_at = db.Column(db.Date)
     status = db.Column(db.Boolean)
 
 
