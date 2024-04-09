@@ -64,32 +64,6 @@ p {
 }
 
 
-/* Footer Styles */
-footer {
-    background-color: #333;
-    color: #fff;
-    text-align: center;
-    padding: 20px 0;
-}
-
-footer p {
-    font-size: 1em;
-}
-
-.social-icons {
-    margin-top: 20px;
-}
-
-.social-icon {
-    display: inline-block;
-    margin-right: 10px;
-    font-size: 24px;
-    color: #007bff;
-}
-
-
-
-
 .logo {
     display: flex;
     justify-content: center;

@@ -29,3 +29,31 @@
 .questionnaire.active {
     display: block; /* Display when active */
 }
+
+/* Footer Styles */
+footer {
+    background-color: #333;
+    color: #fff;
+    text-align: center;
+    padding: 20px 0;
+}
+
+footer p {
+    font-size: 1em;
+}
+
+.social-icons {
+    margin-top: 20px;
+}
+
+.social-icon {
+    display: inline-block;
+    margin-right: 10px;
+    font-size: 24px;
+    color: #007bff;
+}
+
+/* Styles for sections */
+.section {
+    text-align: left;
+}

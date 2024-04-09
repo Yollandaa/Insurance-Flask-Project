@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %} {% endblock %}</title>
+    <link rel="stylesheet" href="../static/css/styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+
+    <link
+    rel="stylesheet"
+    href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css"
+    integrity="sha384-xOolHFLEh07PJGoPkLv1IbcEPTNtaed2xpHsD9ESMhqIYd0nLMwNLD69Npy4HI+N"
+    crossorigin="anonymous"
+  />
+</head>
+<body>
+    <nav class="navbar">
+        <a class="navbar-brand" href="/">
+            <img src="../static/images/logo2.png" width="60" height="60" class="d-inline-block align-top" alt="">
+            <span class="brand-text">InsureHub</span>
+        </a>
+        <div class="d-flex align-items-center">
+            <a class="nav-link active" href="/dashboard"> Dashboard <span class="sr-only">(current)</span></a>
+            <a class="nav-link" href="/policies">Policy Management</a>
+            <a class="nav-link" href="/profile">Profile Settings</a>
+            <a class="nav-link" href="/">
+                <i class="fas fa-user"></i> Logout
+            </a>
+        </div>
+    </nav>
+
+    
+    {% block dashboard %} {% endblock %}
+
+    {% block profile %} {% endblock %}
+
+    {% block policies %} {% endblock %}
+
+
+
+
+    <footer>
+        <div class="container">
+            <p>&copy; 2024 IPMS. All rights reserved.</p>
+            <div class="social-icons">
+                <a href="#" class="social-icon">
+                    <i class="fab fa-facebook-f"></i>
+                </a>
+                <a href="#" class="social-icon">
+                    <i class="fab fa-twitter"></i>
+                </a>
+                <a href="#" class="social-icon">
+                    <i class="fab fa-instagram"></i>
+                </a>
+                <!-- Add more social media icons as needed -->
+            </div>
+        </div>
+    </footer>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js"
+      integrity="sha384-Fy6S3B9q64WdZWQUiU+q4/2Lc9npb8tCaSX9FK7E8HnRr0Jz8D6OP9dO5Vg3Q9ct"
+      crossorigin="anonymous"
+    ></script>
+</body>
+</html>

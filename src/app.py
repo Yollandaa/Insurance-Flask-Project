@@ -73,6 +73,16 @@ def get_quote_page():
     return render_template("get-quote.html", policies=policy_types)
 
 
+@app.route("/profile")
+def profile_page():
+    return render_template("profile.html")
+
+
+@app.route("/policies")
+def policy_management():
+    return render_template("policies.html", policies=policy_types)
+
+
 from routes.form_bp import forms_bp
 
 app.register_blueprint(forms_bp, url_prefix="/form")
