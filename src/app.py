@@ -1,12 +1,13 @@
 import os
 import json
-from flask import Flask, jsonify, render_template, request
+from flask import Flask, flash, jsonify, redirect, render_template, request, url_for
 from flask_login import current_user
 from sqlalchemy.sql import text
 from dotenv import load_dotenv
 from pprint import pprint
 import uuid
 from extensions import db, login_manager
+from routes.dashboard_pb import ProfileForm
 
 
 load_dotenv()
@@ -65,7 +66,10 @@ def welcome_page():
 @app.route("/dashboard")
 def dashboard_page():
     user = current_user
-    return render_template("dashboard.html", data=user.to_dict())
+    print(user.policies)  # this returns multiple policies
+    return render_template(
+        "dashboard.html", user=user.to_dict(), policies=user.policies
+    )
 
 
 @app.route("/get-quote")
@@ -73,9 +77,35 @@ def get_quote_page():
     return render_template("get-quote.html", policies=policy_types)
 
 
-@app.route("/profile")
+@app.route("/profile", methods=["POST", "GET"])
 def profile_page():
-    return render_template("profile.html")
+    form = ProfileForm()
+    if form.validate_on_submit():
+        print("Heeeeeeeeeeeeeeeellllllllo")
+        # Update user data here
+        current_user.username = form.username.data
+        current_user.name = form.name.data
+        current_user.surname = form.surname.data
+        current_user.id_number = form.id_number.data
+        current_user.phone_number = form.phone_number.data
+        current_user.email = form.email.data
+
+        try:
+            db.session.commit()  # Commit the changes to the database
+            flash("Profile updated successfully!", "profile_updated")
+            return redirect(url_for("profile"))
+        except Exception as e:
+            db.session.rollback()
+            flash("Profile update failed!", "profile_update_failed")
+    elif request.method == "GET":
+        # Pre-fill form with user's existing data
+        form.username.data = current_user.username
+        form.name.data = current_user.name
+        form.surname.data = current_user.surname
+        form.id_number.data = current_user.id_number
+        form.phone_number.data = current_user.phone_number
+        form.email.data = current_user.email
+    return render_template("profile.html", form=form, user=current_user)
 
 
 @app.route("/policies")
@@ -83,6 +113,7 @@ def policy_management():
     return render_template("policies.html", policies=policy_types)
 
 
+from models.policy import Policy
 from routes.form_bp import forms_bp
 
 app.register_blueprint(forms_bp, url_prefix="/form")

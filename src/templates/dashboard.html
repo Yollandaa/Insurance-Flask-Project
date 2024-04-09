@@ -1,24 +1,28 @@
 {% extends 'dashboard_base.html' %} {% block title %} Dashboard - InsureHub {% endblock %}
 {% block dashboard %}
 
-<h1>Welcome, {{data["name"]}}!</h1> <!-- Display the user's name -->
+<h1>Welcome, {{user["name"]}}!</h1> <!-- Display the user's name -->
 <h2>Dashboard Overview</h2>
     <section id="dashboard">
         <div class="container">
             <!-- summary of policy details -->
-            <!-- {{data.policy_type}} -> has a list of policies from car, health, funeral, and life insurance -->
             <div class="policies-box">
                 <!-- Iterate over each policy in the data -->
-                {% for policy in data["policies"] %}
+                {% for policy in policies %}
                 <div class="policy-cont">
-                    <h3>{{ policy["type"] }}</h3> <!-- Display the policy type -->
-                    {% if policy["type"] == "Car Coverage" %}
-                        <img class="poster" src="https://media.istockphoto.com/id/1357133019/photo/car-insurance-protection-with-umbrella.jpg?s=612x612&w=0&k=20&c=Cjyx-yrjuezo59gUupWtci4XcYArXgxbEOmtNRt82rg=">
-                    {%endif %}
-                    <p><strong>Monthly Premium:</strong> ${{ policy["premium_amount"] }}</p> <!-- Display the monthly premium -->
-                    <p><strong>Coverage Amount:</strong> ${{ policy["coverage_amount"] }}</p> <!-- Display the coverage amount -->
-                    <!-- Add more details about the policy as needed -->
-                    <a href="">More Details</a> <!-- Link to the policy management page with policy ID -->
+                <h3>{{ policy.policy_type }}</h3> <!-- Display the policy type -->
+                {% if policy.policy_type == "Comprehensive" %}
+                    <img class="poster" src="https://media.istockphoto.com/id/1357133019/photo/car-insurance-protection-with-umbrella.jpg?s=612x612&w=0&k=20&c=Cjyx-yrjuezo59gUupWtci4XcYArXgxbEOmtNRt82rg=">
+                {% endif %}
+                <p> <i class="fa fa-money" style="font-size:30px"></i>{{ policy.premium_amount }}</p> <!-- Display the monthly premium -->
+                <p><strong>Coverage Amount:</strong> <i class="fa fa-money"></i>{{ policy.coverage_amount }}</p> <!-- Display the coverage amount -->
+                {% if policy.status == "Active" %}
+                <span class="status-dot active"></span> <!-- Green dot for active status -->
+                {% else %}
+                <span class="status-dot inactive"></span> <!-- Grey dot for inactive status -->
+                {% endif %}
+
+                <a href="">More Details</a> <!-- Link to the policy management page with policy ID -->
                 </div>
                 {% endfor %}
             </div>                    

@@ -101,6 +101,7 @@ footer p {
 .logo img {
     width: 200px; /* Adjust size as needed */
 }
+
 .policies-box {
     display: flex;
     flex-wrap: wrap; /* Allow wrapping if content exceeds container width */
