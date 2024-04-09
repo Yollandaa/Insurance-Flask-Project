@@ -80,23 +80,22 @@ def get_quote_page():
 @app.route("/profile", methods=["POST", "GET"])
 def profile_page():
     form = ProfileForm()
-    if form.validate_on_submit():
-        print("Heeeeeeeeeeeeeeeellllllllo")
+    # print("Yhooooo")
+    if request.method == "POST":
         # Update user data here
         current_user.username = form.username.data
         current_user.name = form.name.data
         current_user.surname = form.surname.data
-        current_user.id_number = form.id_number.data
         current_user.phone_number = form.phone_number.data
         current_user.email = form.email.data
 
         try:
             db.session.commit()  # Commit the changes to the database
             flash("Profile updated successfully!", "profile_updated")
-            return redirect(url_for("profile"))
+            return redirect(url_for("profile_page"))
         except Exception as e:
             db.session.rollback()
-            flash("Profile update failed!", "profile_update_failed")
+            flash(f"Profile update failed!: {e}", "profile_update_failed")
     elif request.method == "GET":
         # Pre-fill form with user's existing data
         form.username.data = current_user.username
@@ -105,6 +104,7 @@ def profile_page():
         form.id_number.data = current_user.id_number
         form.phone_number.data = current_user.phone_number
         form.email.data = current_user.email
+
     return render_template("profile.html", form=form, user=current_user)
 
 

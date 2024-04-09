@@ -3,7 +3,7 @@
 <h2>Profile Settings</h2>
 <section id="profile">
     <div class="container">
-        <form method="POST" action="">
+        <form method="POST" action="/profile">
             {{ form.hidden_tag() }}
 
             {% with messages = get_flashed_messages(with_categories=true) %}
