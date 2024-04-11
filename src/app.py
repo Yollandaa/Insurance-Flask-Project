@@ -9,7 +9,6 @@ import uuid
 from extensions import db, login_manager
 from routes.dashboard_pb import ProfileForm
 
-
 load_dotenv()
 app = Flask(__name__)
 
@@ -66,6 +65,7 @@ def welcome_page():
 @app.route("/dashboard")
 def dashboard_page():
     user = current_user
+
     print(user.policies)  # this returns multiple policies
     return render_template(
         "dashboard.html", user=user.to_dict(), policies=user.policies

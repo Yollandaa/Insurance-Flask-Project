@@ -1,31 +1,54 @@
 {% extends 'dashboard_base.html' %} {% block title %} Dashboard - InsureHub {% endblock %}
 {% block dashboard %}
-
-<h1>Welcome, {{user["name"]}}!</h1> <!-- Display the user's name -->
-<h2>Dashboard Overview</h2>
     <section id="dashboard">
-        <div class="container">
+        <div class="cont">
+            <h1 class="welcome">Welcome, {{user["name"]}}!</h1> <!-- Display the user's name -->
+            <h2>Dashboard Overview</h2>
+
             <!-- summary of policy details -->
+            
             <div class="policies-box">
                 <!-- Iterate over each policy in the data -->
                 {% for policy in policies %}
                 <div class="policy-cont">
-                <h3>{{ policy.policy_type }}</h3> <!-- Display the policy type -->
-                {% if policy.policy_type == "Comprehensive" %}
-                    <img class="poster" src="https://media.istockphoto.com/id/1357133019/photo/car-insurance-protection-with-umbrella.jpg?s=612x612&w=0&k=20&c=Cjyx-yrjuezo59gUupWtci4XcYArXgxbEOmtNRt82rg=">
-                {% endif %}
-                <p> <i class="fa fa-money" style="font-size:30px"></i>{{ policy.premium_amount }}</p> <!-- Display the monthly premium -->
-                <p><strong>Coverage Amount:</strong> <i class="fa fa-money"></i>{{ policy.coverage_amount }}</p> <!-- Display the coverage amount -->
-                {% if policy.status == "Active" %}
-                <span class="status-dot active"></span> <!-- Green dot for active status -->
-                {% else %}
-                <span class="status-dot inactive"></span> <!-- Grey dot for inactive status -->
-                {% endif %}
+                    <!-- Title -->
+                    <h3>{{ policy.policy_type }}</h3>
+                    
+                    <!-- Image -->
+                    <div class="row align-items-center">
+                        <div class="col-md-12">
+                            {% if policy.policy_type == "Comprehensive" %}
+                                <img class="poster" src="../static/images/comprehensive.png">
+                            {% elif policy.policy_type == "Fire and Theft" %}
+                                <img class="poster" src="https://strollinsurance.s3-assets.com/third-party-fire-theft.png">
+                            {% elif policy.policy_type == "Third-Party" %}
+                                <img class="poster" src="https://i0.wp.com/pune.news/wp-content/uploads/2023/06/Car-Insurance.webp?resize=696%2C392&ssl=1">
+                            {% endif %}
+                        </div>
+                    </div>
+                    
+                    <!-- Content -->
+                    <div class="row">
+                        <div class="col-md-12">
+                            <!-- Info -->
+                            <p><i class="fa-solid fa-car" style="font-size:30px"></i> Car</p>
+                            <p><i class="fa fa-money" style="font-size:30px"></i> {{ policy.premium_amount }}</p> <!-- Display the monthly premium -->
+                            <p><i class="fa-solid fa-hand-holding-dollar" style="font-size:30px"></i> {{ policy.coverage_amount }}</p> <!-- Display the coverage amount -->
 
-                <a href="">More Details</a> <!-- Link to the policy management page with policy ID -->
+                            {% if policy.status == "Active" %}
+                                <i class="fa-solid fa-circle" style="color: green;"></i> <!-- Green dot for active status -->
+                            {% else %}
+                            <i class="fa-solid fa-circle" style="color: grey;"></i> <!-- Grey dot for inactive status -->
+                            {% endif %}
+                            
+                            <p><a href="/policies" class="btn btn-primary">More Info </a>
+</p>
+                        </div>
+                    </div>
                 </div>
                 {% endfor %}
-            </div>                    
+            </div>            
+            
         </div>
     </section>
 {% endblock %}

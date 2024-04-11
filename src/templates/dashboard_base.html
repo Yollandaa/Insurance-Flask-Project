@@ -8,7 +8,7 @@
     <link rel="stylesheet" href="../static/css/dashboard-style.css">
 
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
-
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 
     <link
@@ -26,23 +26,18 @@
         </a>
         <div class="d-flex align-items-center">
             <a class="nav-link active" href="/dashboard"> Dashboard <span class="sr-only">(current)</span></a>
-            <a class="nav-link" href="/policies">Policy Management</a>
             <a class="nav-link" href="/profile">Profile Settings</a>
             <a class="nav-link" href="/">
                 <i class="fas fa-user"></i> Logout
             </a>
         </div>
     </nav>
-
     
     {% block dashboard %} {% endblock %}
 
     {% block profile %} {% endblock %}
 
     {% block policies %} {% endblock %}
-
-
-
 
     <footer>
         <div class="container">
