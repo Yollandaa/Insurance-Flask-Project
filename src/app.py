@@ -7,7 +7,7 @@ from dotenv import load_dotenv
 from pprint import pprint
 import uuid
 from extensions import db, login_manager
-from routes.dashboard_pb import ProfileForm
+from routes.dashboard_pb import PolicyForm, ProfileForm
 
 load_dotenv()
 app = Flask(__name__)
@@ -108,9 +108,31 @@ def profile_page():
     return render_template("profile.html", form=form, user=current_user)
 
 
-@app.route("/policies")
+@app.route("/policies", methods=["POST"])
 def policy_management():
-    return render_template("policies.html", policies=policy_types)
+    policy_id = request.form.get("policy_id")
+    policy = Policy.query.get(policy_id)
+    form = PolicyForm()
+
+    # Pre-fill form with user's existing data
+    form.car_type.data = policy.vehicle.car_type
+    form.policy_type.data = policy.policy_type
+    form.coverage_amount.data = policy.coverage_amount
+    form.premium_amount.data = policy.premium_amount
+    form.start_date.data = policy.start_date
+    form.end_date.data = policy.end_date
+    form.status.data = policy.status
+
+    if form.validate_on_submit():
+        # Update policy with new description
+        policy.description = form.description.data
+        # Save changes to the database
+        # db.session.commit()
+        flash("Policy updated successfully", "policy_updated")
+        # flash("Policy update failed", "policy_update_failed")
+
+    print(policy_id)
+    return render_template("policies.html", form=form, policy_id=policy_id)
 
 
 from models.policy import Policy

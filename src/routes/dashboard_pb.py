@@ -13,6 +13,7 @@ from wtforms import (
     StringField,
     SubmitField,
     TelField,
+    TextAreaField,
     ValidationError,
     validators,
 )
@@ -52,3 +53,15 @@ class ProfileForm(FlaskForm):
             user = User.query.filter_by(username=field.data).first()
             if user:
                 raise ValidationError("Username already exists")
+
+
+class PolicyForm(FlaskForm):
+    car_type = StringField("Car Type")
+    policy_type = StringField("Policy Type")
+    premium_amount = IntegerField("Premium Amount")
+    coverage_amount = IntegerField("Coverage Amount")
+    start_date = DateField("Start Date")
+    end_date = DateField("End Date")
+    status = StringField("Status")
+    description = TextAreaField("Description", validators=[InputRequired()])
+    submit = SubmitField("Claim")

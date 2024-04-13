@@ -1,11 +1,82 @@
-{% extends 'dashboard_base.html' %} {% block title %} PolicyManagement - InsureHub {% endblock %}
-{% block policies %}
-<h2>Policy Management</h2>
-<section id="policy-management">
-    <div class="container">
+{% extends 'dashboard_base.html' %}
+{% block title %} Policy Management - InsureHub {% endblock %}
+{% block policy_management %}
+    <h2>Policy Details</h2>
+    <section id="policy">
+        <div class="container">
+            <form method="POST" action="/policies">
+                {{ form.hidden_tag() }}
 
-        <!-- Display options for managing policies: view, add, edit, cancel policies -->
-    </div>
-</section>
+                {% with messages = get_flashed_messages(with_categories=true) %}
+                    {% if messages %}
+                        {% for category, message in messages %}
+                            {% if category == 'policy_updated' %}
+                                <div class="alert alert-success">
+                                    {{ message }}
+                                </div>
+                            {% elif category == 'policy_update_failed' %}
+                                <div class="alert alert-danger">
+                                    {{ message }}
+                                </div>
+                            {% endif %}
+                        {% endfor %}
+                    {% endif %}
+                {% endwith %}
+
+                <div class="form-group">
+                    {{ form.car_type.label }}:
+                    {{ form.car_type(class="form-control", readonly="readonly") }}
+                </div>
+                <div class="form-group">
+                    {{ form.policy_type.label }}:
+                    {{ form.policy_type(class="form-control", readonly="readonly") }}
+                </div>
+                <div class="form-group">
+                    {{ form.premium_amount.label }}:
+                    <div class="input-group">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text">R</span>
+                        </div>
+                    {{ form.premium_amount(class="form-control", readonly="readonly") }}
+                    </div>
+                </div>
+                <div class="form-group">
+                    {{ form.coverage_amount.label }}:
+                    <div class="input-group">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text">R</span>
+                        </div>
+                    {{ form.coverage_amount(class="form-control", readonly="readonly") }}
+                    </div>
+                </div>
+                <div class="form-group">
+                    {{ form.start_date.label }}:
+                    {{ form.start_date(class="form-control", readonly="readonly") }}
+                </div>
+                <div class="form-group">
+                    {{ form.end_date.label }}:
+                    {{ form.end_date(class="form-control", readonly="readonly") }}
+                </div>
+                <div class="form-group">
+                    {{ form.status.label }}:
+                    {{ form.status(class="form-control", readonly="readonly") }}
+                </div>
+
+                <div class="form-group" id="description-group" style="display: none;">
+                    {{ form.description.label }}:
+                    {{ form.description(class="form-control") }}
+                </div>
+                              
+                <input type="hidden" name="policy_id" value="{{ policy_id }}">
+                {{ form.submit(class="btn btn-primary", id="claim-button") }}
+                
+            </form>
+        </div>
+    </section>
+
+    <script>
+        document.getElementById("claim-button").addEventListener("click", function() {
+            document.getElementById("description-group").style.display = "block";
+        });
+    </script>
 {% endblock %}
-
