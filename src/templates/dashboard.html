@@ -31,14 +31,16 @@
                     <div class="row">
                         <div class="col-md-12">
                             <!-- Info -->
-                            <p><i class="fa-solid fa-car" style="font-size:30px"></i> Car</p>
+                            <p><i class="fa-solid fa-car" style="font-size:30px"></i>  {{ policy.vehicle.car_type }} </p>
                             <p><i class="fa fa-money" style="font-size:30px"></i> {{ policy.premium_amount }}</p> <!-- Display the monthly premium -->
                             <p><i class="fa-solid fa-hand-holding-dollar" style="font-size:30px"></i> {{ policy.coverage_amount }}</p> <!-- Display the coverage amount -->
 
                             {% if policy.status == "Active" %}
-                                <i class="fa-solid fa-circle" style="color: green;"></i> <!-- Green dot for active status -->
+                                <i class="fa-solid fa-circle" style="color: green;"> Active </i> <!-- Green dot for active status -->
+                            {% elif policy.status == "Pending" %}
+                                <i class="fa-solid fa-circle" style="color: orange;"> Pending </i> <!-- Orange dot for pending status -->
                             {% else %}
-                            <i class="fa-solid fa-circle" style="color: grey;"></i> <!-- Grey dot for inactive status -->
+                                <i class="fa-solid fa-circle" style="color: grey;"> Offline </i> <!-- Grey dot for offline status -->
                             {% endif %}
                             
                             <!-- <p><a href="/policies" class="btn btn-primary">More Info </a> -->

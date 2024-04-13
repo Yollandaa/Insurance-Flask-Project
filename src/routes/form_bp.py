@@ -112,6 +112,15 @@ class ContactForm(FlaskForm):
 
 # Form for quote calculator
 class GetQuoteForm(FlaskForm):
+    policy_type = SelectField(
+        "Policy Type",
+        choices=[
+            ("Comprehension", "Comprehension"),
+            ("Theft and Fire", "Theft and Fire"),
+            ("Third Party", "Third Party"),
+        ],
+        validators=[InputRequired()],
+    )
     age = IntegerField(label="Age", validators=[InputRequired()])
     car_type = SelectField(
         "Car Type",

@@ -16,7 +16,7 @@ class User(UserMixin, db.Model):
     id_number = db.Column(db.Integer, nullable=False, unique=True)
     phone_number = db.Column(db.String(50), nullable=False)
     email = db.Column(db.String(50))
-    license_year_issue = db.Column(db.Date)
+    license_year_issue = db.Column(db.DATE)
 
     # Define relationship to Policy
     vehicles = db.relationship("Vehicle", back_populates="user")

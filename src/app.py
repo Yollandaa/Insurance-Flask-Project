@@ -6,8 +6,13 @@ from sqlalchemy.sql import text
 from dotenv import load_dotenv
 from pprint import pprint
 import uuid
+from calculator import car_quote, get_coverage
 from extensions import db, login_manager
+from models.vehicle import Vehicle
+from models.policy import Policy
+from models.users import User
 from routes.dashboard_pb import PolicyForm, ProfileForm
+from datetime import datetime, timedelta
 
 load_dotenv()
 app = Flask(__name__)
@@ -21,44 +26,10 @@ app.config["SQLALCHEMY_DATABASE_URI"] = connection_String
 db.init_app(app)
 login_manager.init_app(app)
 
-users_data = {
-    "username": "Emmie.MacGyver",
-    "password": "NEhs5117NIVx0VF",
-    "first_name": "Aubree",
-    "surname": "O'Conner",
-    "ID_number": 82865,
-    "Address": "1004 Jakayla Plaza",
-    "phone_number": "(506) 632-6488 x497",
-    "profile_url": "https://cloudflare-ipfs.com/ipfs/Qmd3W5DuhgHirLHGVixi6V76LhCkZUz6pnFt5AJBiyvHye/avatar/1071.jpg",
-    "policies": [
-        {
-            "type": "Life Coverage",
-            "coverage_amount": "608.89",
-            "premium_amount": "93.18",
-            "status": "Active",
-        },
-        {
-            "type": "Car Coverage",
-            "coverage_amount": "608.89",
-            "premium_amount": "93.18",
-            "status": "Pending",
-        },
-    ],
-    "beneficiary": "Peter Orn",
-    "id": "1",
-}
-
-policy_types = [
-    "Vehicle Insurance",
-    "Life Insurance",
-    "Property Insurance",
-    "Funeral Insurance",
-]
-
 
 @app.route("/")
 def welcome_page():
-    return render_template("Home.html", policies=policy_types)
+    return render_template("Home.html")
 
 
 # This will receive the user ID, so each user has their own information on the dashboard
@@ -135,8 +106,72 @@ def policy_management():
     return render_template("policies.html", form=form, policy_id=policy_id)
 
 
+@app.route("/quotes", methods=["GET", "POST"])
+def apply_policy():
+    form = GetQuoteForm()
+    if form.validate_on_submit():
+        policy_type = form.policy_type.data
+        age = form.age.data
+        car_type = form.car_type.data
+        year = form.year.data.year
+        license_years = form.license_years.data
+        accidents = form.accidents.data
+
+        premium = car_quote(age, license_years, car_type, year, accidents)
+
+        if request.form.get("button_apply") == "apply":
+            print("Greetings")
+            try:
+                # Calculate end date
+                end_date = datetime.now().date() + timedelta(days=365)
+
+                # For adding the vehicle
+                vehicle = Vehicle(
+                    user_id=current_user.id,
+                    car_type=car_type,
+                    year=year,
+                    num_accidents=accidents,
+                )
+                db.session.add(vehicle)
+                db.session.commit()
+
+                vehicle_id = vehicle.vehicle_id
+
+                # For adding the policy
+                policy = Policy(
+                    user_id=current_user.id,
+                    policy_type=policy_type,
+                    coverage_amount=get_coverage(premium),
+                    premium_amount=premium,
+                    start_date=datetime.now().date(),  # Convert to date object
+                    end_date=end_date,
+                    status="Pending",
+                    vehicle_id=vehicle_id,
+                )
+
+                db.session.add(policy)
+                db.session.commit()
+
+                # Calculate the year when the license was issued
+                license_issue_year = datetime.now().year - license_years
+                license_issue_date = datetime(license_issue_year, 1, 1).date()
+                current_user.license_year_issue = license_issue_date
+                db.session.commit()
+
+                flash(f"Successfully applied", "apply_message")
+                return redirect(url_for("apply_policy"))
+            except Exception as e:
+                db.session.rollback()
+                flash(f"Policy creation failed!: {e}", "policy_creation_failed")
+
+        # return f"<h1> Quote: R{premium} </h1>"
+        formatted_premium = "{:.2f}".format(premium)
+        flash(f"Quote: R{formatted_premium}", "quote_message")
+    return render_template("dashboard_quote.html", form=form)
+
+
 from models.policy import Policy
-from routes.form_bp import forms_bp
+from routes.form_bp import GetQuoteForm, forms_bp
 
 app.register_blueprint(forms_bp, url_prefix="/form")
 

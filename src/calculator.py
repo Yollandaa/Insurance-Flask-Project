@@ -43,11 +43,11 @@ def car_quote(age, license_year_issue, car_type, year, accidents=0):
 
 def get_coverage(premium_amount):
     if premium_amount < 200:
-        return "R15,000 coverage"
+        return 15000
     elif 200 <= premium_amount < 300:
-        return "R25,000 coverage"
+        return 25000
     else:
-        return "Custom coverage based on premium amount"
+        return 50000
 
 
 if __name__ == "__main__":
