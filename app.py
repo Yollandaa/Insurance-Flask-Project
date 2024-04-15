@@ -29,7 +29,7 @@ login_manager.init_app(app)
 
 @app.route("/")
 def welcome_page():
-    return render_template("Home.html")
+    return render_template("home.html")
 
 
 # This will receive the user ID, so each user has their own information on the dashboard
