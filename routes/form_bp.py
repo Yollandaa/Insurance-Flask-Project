@@ -91,7 +91,7 @@ class LoginForm(FlaskForm):
             user_db_data = user.to_dict()
             form_password = field.data
             if not check_password_hash(user_db_data["password"], form_password):
-                print(user_db_data["password"])
+                # print(user_db_data["password"])
                 raise ValidationError("Incorrect password")
 
 
@@ -115,9 +115,9 @@ class GetQuoteForm(FlaskForm):
     policy_type = SelectField(
         "Policy Type",
         choices=[
-            ("Comprehension", "Comprehension"),
-            ("Theft and Fire", "Theft and Fire"),
-            ("Third Party", "Third Party"),
+            ("Comprehensive", "Comprehensive"),
+            ("Fire and Theft", "Fire and Theft"),
+            ("Third-Party", "Third-Party"),
         ],
         validators=[InputRequired()],
     )

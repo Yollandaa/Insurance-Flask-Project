@@ -1,7 +1,7 @@
 import os
 import json
 from flask import Flask, flash, jsonify, redirect, render_template, request, url_for
-from flask_login import current_user
+from flask_login import current_user, login_required, logout_user
 from sqlalchemy.sql import text
 from dotenv import load_dotenv
 from pprint import pprint
@@ -34,21 +34,24 @@ def welcome_page():
 
 # This will receive the user ID, so each user has their own information on the dashboard
 @app.route("/dashboard")
+@login_required
 def dashboard_page():
     user = current_user
 
-    print(user.policies)  # this returns multiple policies
+    # print(user.policies)  # this returns multiple policies
     return render_template(
         "dashboard.html", user=user.to_dict(), policies=user.policies
     )
 
 
 @app.route("/get-quote")
+@login_required
 def get_quote_page():
-    return render_template("get-quote.html", policies=policy_types)
+    return render_template("get-quote.html")
 
 
 @app.route("/profile", methods=["POST", "GET"])
+@login_required
 def profile_page():
     form = ProfileForm()
     # print("Yhooooo")
@@ -80,6 +83,7 @@ def profile_page():
 
 
 @app.route("/policies", methods=["POST"])
+@login_required
 def policy_management():
     policy_id = request.form.get("policy_id")
     policy = Policy.query.get(policy_id)
@@ -102,11 +106,12 @@ def policy_management():
         flash("Policy updated successfully", "policy_updated")
         # flash("Policy update failed", "policy_update_failed")
 
-    print(policy_id)
+    # print(policy_id)
     return render_template("policies.html", form=form, policy_id=policy_id)
 
 
 @app.route("/quotes", methods=["GET", "POST"])
+@login_required
 def apply_policy():
     form = GetQuoteForm()
     if form.validate_on_submit():
@@ -120,7 +125,7 @@ def apply_policy():
         premium = car_quote(age, license_years, car_type, year, accidents)
 
         if request.form.get("button_apply") == "apply":
-            print("Greetings")
+            # print("Greetings")
             try:
                 # Calculate end date
                 end_date = datetime.now().date() + timedelta(days=365)
@@ -168,6 +173,13 @@ def apply_policy():
         formatted_premium = "{:.2f}".format(premium)
         flash(f"Quote: R{formatted_premium}", "quote_message")
     return render_template("dashboard_quote.html", form=form)
+
+
+@app.route("/logout")
+@login_required
+def logout():
+    logout_user()
+    return redirect(url_for("welcome_page"))
 
 
 from models.policy import Policy

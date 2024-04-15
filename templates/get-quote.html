@@ -27,9 +27,9 @@
             {% endwith %}
                         
             <form class="form-group">
-                {{ form.insurance_type.label}}
-                {{ form.insurance_type(class="form-control") }}
-                {% for error in form.insurance_type.errors %}
+                {{ form.policy_type.label}}
+                {{ form.policy_type(class="form-control") }}
+                {% for error in form.policy_type.errors %}
                     <span class="text-danger">{{ error }}</span>
                 {% endfor %}
             </form>

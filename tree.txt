@@ -1,0 +1,40 @@
+Insurance-Flask-Project                                             
+├─ models                                                                                              
+│  ├─ claims.py                                                     
+│  ├─ contactus.py                                                  
+│  ├─ policy.py                                                     
+│  ├─ users.py                                                      
+│  └─ vehicle.py                                                    
+├─ routes                                                                                             
+│  ├─ dashboard_pb.py                                               
+│  └─ form_bp.py                                                    
+├─ static                                                           
+│  ├─ css                                                           
+│  │  ├─ dashboard-style.css                                        
+│  │  ├─ forms-style.css                                            
+│  │  ├─ home-style.css                                             
+│  │  └─ styles.css                                                 
+│  └─ images                                                        
+│     ├─ comprehensive.png                                          
+│     ├─ logo.png                                                   
+│     ├─ logo1.png                                                  
+│     └─ logo2.png                                                  
+├─ templates                                                        
+│  ├─ base.html                                                     
+│  ├─ contact-us.html                                               
+│  ├─ dashboard.html                                                
+│  ├─ dashboard_base.html                                           
+│  ├─ dashboard_quote.html                                          
+│  ├─ form-base.html                                                
+│  ├─ get-quote.html                                                
+│  ├─ home.html                                                     
+│  ├─ login.html                                                    
+│  ├─ policies.html                                                 
+│  ├─ profile.html                                                  
+│  └─ register.html                                                                                   
+├─ app.py                                                           
+├─ calculator.py                                                    
+├─ Capstone Project_ Insurance Policy Management System (IPMS).pdf  
+├─ extensions.py                                                    
+├─ README.md                                                        
+└─ requirements.txt                                                 
