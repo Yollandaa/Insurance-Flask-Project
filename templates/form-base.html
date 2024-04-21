@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>{% block title %} {% endblock %}</title>
     <link rel="stylesheet" href="../static/css/forms-style.css">
+    <link rel="stylesheet" href="../static/css/styles.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
     
@@ -34,12 +35,6 @@
   </div>
 </nav>
 
-    <div class="container">
-      <div class="logo">
-        <img src="../static/images/logo2.png" alt="InsureHub Logo">
-              <br></br>
-              <h2>{% block subtitle %} {% endblock %}</h2>
-      </div>
 
         {% block login %} {% endblock %}
 
@@ -48,8 +43,24 @@
         {% block contactus %} {% endblock %}
 
         {% block quote %} {% endblock %}
-        
-    </div>
+
+        <footer>
+          <div class="container">
+              <p>&copy; 2024 IPMS. All rights reserved.</p>
+              <div class="social-icons">
+                  <a href="#" class="social-icon">
+                      <i class="fab fa-facebook-f"></i>
+                  </a>
+                  <a href="#" class="social-icon">
+                      <i class="fab fa-twitter"></i>
+                  </a>
+                  <a href="#" class="social-icon">
+                      <i class="fab fa-instagram"></i>
+                  </a>
+                  <!-- Add more social media icons as needed -->
+              </div>
+          </div>
+      </footer>
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script

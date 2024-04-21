@@ -1,8 +1,39 @@
 {% extends 'form-base.html' %} {% block title %} ContactUs - InsureHub {% endblock %}
-{% block subtitle %} Let us Contact You {% endblock %}
 {% block contactus %}
+<h2> Let us Contact You </h2>
+<section id="contaus">
+    <div class="container">
 <form method="POST" action="">
     {{ form.hidden_tag() }}
+    {% if form.errors %}
+    <div class="alert alert-danger">
+        <ul>
+            {% for field, errors in form.errors.items() %}
+                {% for error in errors %}
+                    <li>{{ error }}</li>
+                {% endfor %}
+            {% endfor %}
+        </ul>
+    </div>
+    {% endif %}
+
+    <!-- Flashed messages -->
+    {% with messages = get_flashed_messages(with_categories=true) %}
+            {% if messages %}
+                {% for category, message in messages %}
+                {% if category == 'success' %}
+                <div class="alert alert-success">
+                  {{ message }}
+                </div>
+                {% elif category == 'failed' %}
+                <div class="alert alert-danger">
+                  {{ message }}
+                </div>
+              {% endif %}
+                {% endfor %}
+            {% endif %}
+            {% endwith %}
+
     <div class="form-group">
         {{ form.name.label }}<br>
         {{ form.name(class="form-control") }}
@@ -13,8 +44,12 @@
     </div>
     <div class="form-group">
         {{ form.message.label }}<br>
-        {{ form.message(class="form-control", rows=10) }}
+        {{ form.message(class="form-control") }}
     </div>
     {{form.submit(class="btn btn-primary")}}
 </form>
+
+</div>
+
+</section>
 {% endblock %}

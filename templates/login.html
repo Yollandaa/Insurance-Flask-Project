@@ -1,6 +1,8 @@
 {% extends 'form-base.html' %} {% block title %} Login - InsureHub {% endblock %}
-{% block subtitle %} Login to InsureHub {% endblock %}
 {% block login %}
+<h2>  Login to InsureHub</h2>
+<section id="login">
+  <div class="container">
       <!-- action="" -> Submit to current url  -->
       <form method="POST" action="">
         <!-- Hidden input with token as value -->
@@ -30,4 +32,8 @@
         </div>
         {{form.submit(class="btn btn-primary")}}
       </form>
+
+    </div>
+
+  </section>
 {% endblock %}

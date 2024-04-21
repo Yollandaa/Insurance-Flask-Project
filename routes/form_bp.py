@@ -13,6 +13,7 @@ from wtforms import (
     StringField,
     SubmitField,
     TelField,
+    TextAreaField,
     ValidationError,
     validators,
 )
@@ -97,17 +98,16 @@ class LoginForm(FlaskForm):
 
 class ContactForm(FlaskForm):
     name = StringField(label="Name", validators=[InputRequired()])
-    phone_number = TelField(
-        "Phone Number",
-        validators=[
-            InputRequired(),
-            validators.Regexp(
-                "^\d+$", message="Phone number must contain only numbers"
-            ),
-        ],
-    )
-    message = StringField(label="Message")
+    phone_number = TelField("Phone Number", validators=[InputRequired()])
+    message = TextAreaField("Description", validators=[InputRequired()])
     submit = SubmitField(label="Submit")
+
+    def validate_phone_number(self, field):
+        # Check if phonenumber is integer
+        try:
+            int(field.data)
+        except ValueError:
+            raise ValidationError("Phone number must be an integer")
 
 
 # Form for quote calculator
@@ -192,10 +192,12 @@ def register():
         try:
             db.session.add(new_user)
             db.session.commit()
-            return f"<h1> {username} Registration successful </h1>", 201
+            # return f"<h1> {username} Registration successful </h1>", 201
+            flash("Registration successful. You can login :)", "success")
         except Exception as e:
             db.session.rollback()
-            return f"<h1> Registration Failed </h1>, {e}</h1>"
+            # return f"<h1> Registration Failed </h1>, {e}</h1>"
+            flash("Registration Failed.", "failed")
 
     # ONLY GET
     return render_template("register.html", form=form)
@@ -212,7 +214,7 @@ def login():
         user = User.query.filter_by(username=username).first()
 
         login_user(user)  # token is issued - (cookies) stored in the browser
-        flash("Logged in successfully", "sucess")
+        flash("Logged in successfully", "success")
         return redirect(url_for("dashboard_page"))
 
     return render_template("login.html", form=form)
@@ -234,17 +236,18 @@ def home():
             name=name,
             phone_number=phone_number,
             message=message,
-            created_at=datetime.datetime.now(),
+            created_at=datetime.now(),
             status=True,
         )
 
         try:
             db.session.add(new_contact)
             db.session.commit()
-            return f"<h1> {new_contact} Message successfully added </h1>", 201
+            form = ContactForm()
+            flash("Message successfully added", "success")
         except Exception as e:
             db.session.rollback()
-            return f"<h1> Message Failed </h1>, {e}</h1>"
+            flash("Message failed to add", "failed")
 
     return render_template("contact-us.html", form=form)
 
@@ -253,6 +256,7 @@ def home():
 def get_quote():
     form = GetQuoteForm()
     if form.validate_on_submit():
+        print("Hi")
         age = form.age.data
         car_type = form.car_type.data
         year = form.year.data.year

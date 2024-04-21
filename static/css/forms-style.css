@@ -1,6 +1,9 @@
-body {
-    background-color: #1985A1;
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
 }
+
 /* Nav Bar Styles */
 .navbar-brand span {
     font-size: 37px;
@@ -14,12 +17,18 @@ body {
     z-index: 1000;
 }
 
-.container {
+/* .container {
     width: 100%;
-    background-color: #d7f3fd;
+    /* background-color: #d7f3fd;
     padding: 40px;
     margin: auto; 
     margin-top: 1px;
+} */
+
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
 }
 
 .logo {

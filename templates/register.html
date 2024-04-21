@@ -1,7 +1,8 @@
 {% extends 'form-base.html' %} {% block title %} Signup - InsureHub {% endblock %}
-{% block subtitle %} Register to InsureHub {% endblock %}
 {% block register %}
-
+<h2> Register to InsureHub </h2>
+<section id="register">
+    <div class="container">
 <form action="" method="POST">
 
     <!-- {{form.hidden_tag()}} {% if form.username.errors %} {% for error in form.username.errors %}
@@ -22,6 +23,23 @@
         </ul>
     </div>
     {% endif %}
+
+    <!-- Flashed messages -->
+    {% with messages = get_flashed_messages(with_categories=true) %}
+            {% if messages %}
+                {% for category, message in messages %}
+                {% if category == 'success' %}
+                <div class="alert alert-success">
+                  {{ message }}
+                </div>
+                {% elif category == 'failed' %}
+                <div class="alert alert-danger">
+                  {{ message }}
+                </div>
+              {% endif %}
+                {% endfor %}
+            {% endif %}
+            {% endwith %}
 
     <div class="form-group">
         {{ form.username.label }}: {{ form.username(placeholder="Username", class="form-control") }}
@@ -58,4 +76,7 @@
     </div>
 </form>
 
+</div>
+
+</section>
 {% endblock %}
