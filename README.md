@@ -1,6 +1,7 @@
 # Insurance-Flask-Project
 - Objective: Build an IPMS using Flask to showcase a full-stack development approach, from server-side logic with Flask to database interactions and RESTful API services, focused on insurance operations.
-- Website can be found here: https://insurance-flask-project.onrender.com
+- Website can be found here: https://insurance-flask-project.onrender.com (No longer available, azure account deleted)
+- Video showcasing UI functionality: https://drive.google.com/file/d/1pnkfC6XjxZUeNVQmIlNM-ZOBZjQmy3T_/view?usp=sharing
 
 ## Create virtual environment
 - Creates a copy of your current python
